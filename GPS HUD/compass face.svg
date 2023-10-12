@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   version="1.0"
+   sodipodi:docbase="C:\Users\drober1\Second Life\lsl\work in progress"
+   sodipodi:docname="compass face.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="C:\Users\drober1\Second Life\lsl\work in progress\compass face.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="375"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     width="1024px"
+     height="1024px"
+     showgrid="true"
+     inkscape:window-width="871"
+     inkscape:window-height="747"
+     inkscape:window-x="342"
+     inkscape:window-y="13" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Dial color"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="arc"
+       style="fill:#b3b3b3;fill-opacity:1"
+       id="path2162"
+       sodipodi:cx="525.71429"
+       sodipodi:cy="525.42859"
+       sodipodi:rx="491.42856"
+       sodipodi:ry="487.14285"
+       d="M 1017.1429 525.42859 A 491.42856 487.14285 0 1 1  34.285736,525.42859 A 491.42856 487.14285 0 1 1  1017.1429 525.42859 z"
+       transform="matrix(1.0418605,0,0,1.0510264,-35.720954,-40.23932)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Minor Points">
+    <g
+       id="g2377"
+       transform="matrix(0.9238795,-0.3826834,0.3826834,0.9238795,-156.96023,234.90762)">
+      <g
+         id="g2367">
+        <g
+           id="g2359"
+           transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,-212.07733,512.00003)">
+          <g
+             transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,-212.07734,512.00001)"
+             id="g2353">
+            <rect
+               style="opacity:1;fill:#000000;fill-opacity:1"
+               id="rect2349"
+               width="10"
+               height="1024"
+               x="-5"
+               y="212.07735"
+               transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,0,0)" />
+            <rect
+               style="opacity:1;fill:#000000;fill-opacity:1"
+               id="rect2351"
+               width="10"
+               height="1024"
+               x="507"
+               y="-6.0984204e-014" />
+          </g>
+          <rect
+             y="-1.0513899e-013"
+             x="507"
+             height="1024"
+             width="10"
+             id="rect2357"
+             style="opacity:1;fill:#000000;fill-opacity:1" />
+        </g>
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1"
+           id="rect2365"
+           width="10"
+           height="1024"
+           x="507"
+           y="-8.9471833e-014" />
+      </g>
+      <path
+         transform="matrix(1.8296733,0,0,1.3912013,-517.47476,-173.38891)"
+         d="M 822.26416 492.65976 A 259.60919 341.43155 0 1 1  303.04578,492.65976 A 259.60919 341.43155 0 1 1  822.26416 492.65976 z"
+         sodipodi:ry="341.43155"
+         sodipodi:rx="259.60919"
+         sodipodi:cy="492.65976"
+         sodipodi:cx="562.65497"
+         id="path2375"
+         style="opacity:1;fill:#b3b3b3;fill-opacity:1"
+         sodipodi:type="arc" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Main points"
+     style="opacity:1">
+    <g
+       id="g2341">
+      <rect
+         transform="matrix(-0.7071068,-0.7071068,0.7071068,-0.7071068,0,0)"
+         y="-515.53552"
+         x="-723.47076"
+         height="1024.0001"
+         width="20.000004"
+         id="rect2183"
+         style="fill:#000000;fill-opacity:1" />
+      <rect
+         transform="matrix(0,-1,1,0,0,0)"
+         y="-5.6884397e-007"
+         x="-516.99994"
+         height="1024.0001"
+         width="20.000002"
+         id="rect2185"
+         style="fill:#000000;fill-opacity:1" />
+      <rect
+         transform="matrix(0.7071068,-0.7071068,0.7071068,0.7071068,0,0)"
+         y="208.54182"
+         x="-6.4644852"
+         height="1024"
+         width="20"
+         id="rect2191"
+         style="fill:#000000;fill-opacity:1" />
+      <rect
+         y="-2.1316282e-014"
+         x="504.07104"
+         height="1024"
+         width="20"
+         id="rect2199"
+         style="fill:#000000;fill-opacity:1" />
+      <path
+         transform="matrix(1.0402098,0,0,0.9883721,-76.461535,-60.973438)"
+         d="M 974.28574 579.71429 A 408.57144 430 0 1 1  157.14285,579.71429 A 408.57144 430 0 1 1  974.28574 579.71429 z"
+         sodipodi:ry="430"
+         sodipodi:rx="408.57144"
+         sodipodi:cy="579.71429"
+         sodipodi:cx="565.71429"
+         id="path2209"
+         style="fill:#b3b3b3;fill-opacity:1"
+         sodipodi:type="arc" />
+    </g>
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#000000;fill-opacity:1"
+       id="path2387"
+       sodipodi:cx="521.23871"
+       sodipodi:cy="488.61914"
+       sodipodi:rx="42.426407"
+       sodipodi:ry="44.446712"
+       d="M 563.66512 488.61914 A 42.426407 44.446712 0 1 1  478.8123,488.61914 A 42.426407 44.446712 0 1 1  563.66512 488.61914 z"
+       transform="matrix(0.7542472,0,0,0.7199633,118.85716,160.21215)" />
+  </g>
+</svg>
