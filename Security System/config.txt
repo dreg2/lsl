@@ -1,0 +1,42 @@
+#------------------------------------------------------------------------#
+# security system config file                                           #
+#------------------------------------------------------------------------#
+
+# Scan range in meters
+SCAN_RANGE: 5.0
+
+# Scan arc in radians (suffix with PI for multiples of Pi)
+SCAN_ARC: 1.0PI
+
+# Scan Rate in seconds
+SCAN_RATE: 5.0
+
+# Restrict scan to parcel (0, OFF, FALSE, NO = don't restrict; 1, ON, TRUE, YES = restrtict scan to parcel)
+SCAN_PARCEL: TRUE
+
+# Time for list entries to expire (append M for minutes, H for hours, D for Days, no suffix means seconds)
+LIST_TIME: 12H
+
+# Type of warning issues (0, NONE = no warning; 1, DIALOG = warn with dialog box;  2, IM = warn with IM)
+WARN_TYPE: DIALOG
+
+# Time after warning before ejection in seconds
+WARN_TIME: 15
+
+# Command chat channel
+CHANNEL: 12
+
+# Eject type (0, NONE = do nothing; 1, EJECT = eject; 2, TELEPORT = teleport to home location)
+EJECT_TYPE: EJECT
+
+# Ban flag (0, OFF, NO, FALSE = don't ban;  1, ON, YES, TRUE = ban)
+BAN_FLAG: FALSE
+
+# Ban time in hours (0.0 = permamnent)
+BAN_TIME: 0.0
+
+# Allowed agents
+#ALLOWED_AGENT: Dreg2 Rossini
+ALLOWED_AGENT: Deidre Bailey
+ALLOWED_AGENT: Kitsune Winkler
+
