@@ -30,7 +30,8 @@ float   SCAN_ARC;
 // Global variables
 list visitor_scnr;
 list visitor_name;
-list visitor_time;
+list visitor_time_first;
+list visitor_time_last;
 
 integer config_file_line;     // current line number
 key     config_query_id;      // dataserver query id
@@ -167,11 +168,17 @@ proc_command(string command)
 		string  new_time = remain;
 
 		// add to list if not found
-		if (llListFindList(visitor_name, [new_name]) == -1)
+		integer visitor_index = 0;
+		if ((visitor_index = llListFindList(visitor_name, [new_name])) == -1)
 			{
-			visitor_scnr = (visitor_scnr=[]) + visitor_scnr + [new_scnr];
-			visitor_name = (visitor_name=[]) + visitor_name + [new_name];
-			visitor_time = (visitor_time=[]) + visitor_time + [new_time];
+			visitor_scnr       = (visitor_scnr=[]) + visitor_scnr + [new_scnr];
+			visitor_name       = (visitor_name=[]) + visitor_name + [new_name];
+			visitor_time_first = (visitor_time_first=[]) + visitor_time_first + [new_time];
+			visitor_time_last  = (visitor_time_last=[]) + visitor_time_last + [new_time];
+			}
+		else
+			{
+			visitor_time_last = llListReplaceList(visitor_time_last, [new_time], visitor_index, visitor_index);
 			}
 		}
 
@@ -198,9 +205,10 @@ proc_command(string command)
 		if (MASTER)
 			{
 			llRegionSay(INTR_CHANNEL, "scanner clear");
-			visitor_scnr  = [];
-			visitor_name  = [];
-			visitor_time  = [];
+			visitor_scnr       = [];
+			visitor_name       = [];
+			visitor_time_first = [];
+			visitor_time_last  = [];
 			llWhisper(0, "List cleared.");
 			}
 		return;
@@ -211,9 +219,10 @@ proc_command(string command)
 		{
 		if (!MASTER)
 			{
-			visitor_scnr  = [];
-			visitor_name  = [];
-			visitor_time  = [];
+			visitor_scnr        = [];
+			visitor_name        = [];
+			visitor_time_first  = [];
+			visitor_time_last   = [];
 			}
 		return;
 		}
@@ -281,7 +290,10 @@ proc_command(string command)
 		integer len = llGetListLength(visitor_name);
 		integer i;
 		for (i = 0; i < len; i++)
-			llWhisper(0, llList2String(visitor_scnr, i) + ": " + llList2String(visitor_time, i) + ": " + llList2String(visitor_name, i));
+			llWhisper(0, llList2String(visitor_scnr, i) + ": "
+				+ llList2String(visitor_time_first, i) + ": "
+				+ llList2String(visitor_time_last, i) + ": "
+				+ llList2String(visitor_name, i));
 		llWhisper(0, "Total = " + (string)len );
 		}
 	}
@@ -303,9 +315,10 @@ default
 	state_entry()
 		{
 		// clear lists
-		visitor_scnr  = [];
-		visitor_name  = [];
-		visitor_time  = [];
+		visitor_scnr       = [];
+		visitor_name       = [];
+		visitor_time_first = [];
+		visitor_time_last  = [];
 
 		// get config
 		init_config();
@@ -328,15 +341,21 @@ default
 			string detected_time = get_timestamp();
 
 			// add to list if not found
+			integer visitor_index = 0;
 			if (llListFindList(visitor_name, [detected_name]) == -1)
 				{
-				visitor_scnr = (visitor_scnr=[]) + visitor_scnr + [ID];
-				visitor_time = (visitor_time=[]) + visitor_time + [detected_time];
-				visitor_name = (visitor_name=[]) + visitor_name + [detected_name];
-
-				// give info to other scanners
-				llRegionSay(INTR_CHANNEL, "add " + ID + ARG_SEP + detected_name + ARG_SEP + detected_time);
+				visitor_scnr       = (visitor_scnr=[]) + visitor_scnr + [ID];
+				visitor_name       = (visitor_name=[]) + visitor_name + [detected_name];
+				visitor_time_first = (visitor_time_first=[]) + visitor_time_first + [detected_time];
+				visitor_time_last  = (visitor_time_last=[]) + visitor_time_last + [detected_time];
 				}
+			else
+				{
+				visitor_time_last = llListReplaceList(visitor_time_last, [detected_time], visitor_index, visitor_index);
+				}
+
+			// give info to other scanners
+			llRegionSay(INTR_CHANNEL, "add " + ID + ARG_SEP + detected_name + ARG_SEP + detected_time);
 			}
 		}
 
