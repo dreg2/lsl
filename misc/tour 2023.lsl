@@ -4,10 +4,11 @@
 
 // Constants
 
-float INTERVAL = 0.4;
-float DAMPING  = 0.4;
+float TIME_STEP  = 0.4; // in seconds
+float DIST_STEP  = 3.0; // in meters
+float MOVE_TAU   = 0.4; // in seconds
 
-list COORDS =
+list DEST_COORDS =
 	[
 	<193.8, 92.0,  23.0>,
 	<171.5, 62.1,  23.0>,
@@ -32,9 +33,8 @@ list COORDS =
 
 // globals
 
-integer index;
-integer running;
-vector  Destination;
+integer dest_index;
+vector  destination;
 
 // states
 
@@ -47,51 +47,53 @@ default
 
 	state_entry()
 		{
-		index = 0;
-		Destination = llList2Vector(COORDS,index);
+		llSetTimerEvent(0.0);
 		llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, FALSE);
+		llOwnerSay("stopped");
 		}
-	 
+
+	touch_start(integer p)
+		{
+		state move;
+		}
+	}
+
+move
+	{
+	on_rez(integer p)
+		{
+		llResetScript();
+		}
+
+	state_entry()
+		{
+		dest_index = 0;
+		destination = llList2Vector(DEST_COORDS, dest_index);
+		llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, TRUE);
+		llOwnerSay("running");
+		llSetTimerEvent(TIME_STEP);
+		}
+
 	timer()
 		{
-		vector newdest = (llVecNorm(Destination - llGetPos()) * 3) + llGetPos();
+		vector newdest = (llVecNorm(destination - llGetPos()) * DIST_STEP) + llGetPos();
 		llLookAt(newdest, 1, 1.);
-        
-        float dist = llVecDist(Destination,llGetPos());
 
-		llMoveToTarget(newdest, DAMPING);
+        float dist = llVecDist(destination, llGetPos());
+
+		llMoveToTarget(newdest, MOVE_TAU);
 
 		if (dist <= 5.0)
 			{
-			index++;
-			if (index >= llGetListLength(COORDS))
-				index = 0;
-            Destination = llList2Vector(COORDS,index);
+			dest_index++;
+			if (dest_index >= llGetListLength(DEST_COORDS))
+				dest_index = 0;
+            destination = llList2Vector(DEST_COORDS, dest_index);
 			}        
 		}
 
 	touch_start(integer p)
 		{
-		key x = llDetectedKey(0);
-
-		if (x == llGetOwner())
-			{
-			if (running)
-				{
-				llOwnerSay("Orca stopped");
-				running = FALSE;
-				llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, FALSE);
-				llSetTimerEvent(0.0);
-				}
-			else
-				{
-				llOwnerSay("Orca running");
-				running = TRUE;
-				llSetTimerEvent(INTERVAL);
-				llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, TRUE);
-				}
-			}
+		state default;
 		}
 	}
-
-
