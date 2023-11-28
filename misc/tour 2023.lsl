@@ -4,43 +4,46 @@
 
 // Constants
 
-float TIME_STEP  = 0.4; // in seconds
-float DIST_STEP  = 3.0; // in meters
+float TIME_STEP  = 0.3; // in seconds
+float DIST_STEP  = 2.0; // in meters
 float MOVE_TAU   = 0.4; // in seconds
+float PROX_THR   = 5.0; // in meters
 
 list DEST_COORDS =
 	[
-	<193.8, 92.0,  23.0>,
-	<171.5, 62.1,  23.0>,
-	<148.1, 61.0,  23.0>,
-	<131.8, 72.8,  23.0>,
-	<131.0, 93.6,  23.0>,
-	<144.7, 105.,  23.0>,
-	<153.7, 76.0,  23.0>,
-	<156.0, 48.0,  23.0>,
-	<150.5, 30.2,  23.0>,
-	<132.0, 23.0,  23.0>,
-	<101.8, 40.9,  23.0>,
-	<50.8,  108.4, 23.0>,
-	<52.5,  123.5, 23.0>,
-	<79.2,  161.9, 23.0>,
-	<107.1, 173.8, 23.0>,
-	<145.8, 178.8, 23.0>,
-	<178.8, 159.3, 23.0>,
-	<193.4, 147.1, 23.0>,
-	<196.4, 116.8, 23.0>
+	<138.0, 58.0, 3801.0>,
+	<168.0, 58.0, 3801.0>,
+	<168.0, 28.0, 3801.0>,
+	<138.0, 28.0, 3801.0>
 	];
+
 
 // globals
 
 integer dest_index;
 vector  destination;
+integer listen_handle;
 
 // states
 
 default
 	{
-	on_rez(integer p)
+	on_rez(integer start_param)
+		{
+		llResetScript();
+		}
+
+	state_entry()
+		{
+		dest_index = 0;
+		llOwnerSay("default");
+		state stop;
+		}
+	}
+
+state stop
+	{
+	on_rez(integer start_param)
 		{
 		llResetScript();
 		}
@@ -50,40 +53,48 @@ default
 		llSetTimerEvent(0.0);
 		llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, FALSE);
 		llOwnerSay("stopped");
+		listen_handle = llListen(0, "", NULL_KEY, "");
 		}
 
-	touch_start(integer p)
+	listen(integer channel, string name, key id, string message)
+		{
+		if (message == "move")
+			{
+			state move;
+			}
+		}
+
+	touch_start(integer num_detected)
 		{
 		state move;
 		}
 	}
 
-move
+state move
 	{
-	on_rez(integer p)
+	on_rez(integer start_param)
 		{
 		llResetScript();
 		}
 
 	state_entry()
 		{
-		dest_index = 0;
 		destination = llList2Vector(DEST_COORDS, dest_index);
 		llSetStatus(STATUS_PHYSICS | STATUS_PHANTOM, TRUE);
 		llOwnerSay("running");
+		listen_handle = llListen(0, "", NULL_KEY, "");
 		llSetTimerEvent(TIME_STEP);
 		}
 
 	timer()
 		{
-		vector newdest = (llVecNorm(destination - llGetPos()) * DIST_STEP) + llGetPos();
-		llLookAt(newdest, 1, 1.);
+		vector new_dest = (llVecNorm(destination - llGetPos()) * DIST_STEP) + llGetPos();
+        float distance  = llVecDist(destination, llGetPos());
 
-        float dist = llVecDist(destination, llGetPos());
+//		llLookAt(new_dest, 1, 1.);
+		llMoveToTarget(new_dest, MOVE_TAU);
 
-		llMoveToTarget(newdest, MOVE_TAU);
-
-		if (dist <= 5.0)
+		if (distance <= PROX_THR)
 			{
 			dest_index++;
 			if (dest_index >= llGetListLength(DEST_COORDS))
@@ -92,8 +103,16 @@ move
 			}        
 		}
 
-	touch_start(integer p)
+	listen(integer channel, string name, key id, string message)
 		{
-		state default;
+		if (message == "stop")
+			{
+			state stop;
+			}
+		}
+
+	touch_start(integer num_detected)
+		{
+		state stop;
 		}
 	}
